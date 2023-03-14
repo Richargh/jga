@@ -1,2 +1,142 @@
+<!DOCTYPE html>
+<html lang="de">
 
-Hello there
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>title</title>
+  
+  <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
+</head>
+
+<body>
+
+<!-- <header>
+</header> -->
+
+<!-- <nav>
+</nav> -->
+
+<main>
+  <h1 id="title"></h1>
+  <button id="reset">Alles zurücksetzen</button>
+  
+  <section>
+    <form id="theForm">
+      <div class="form-example">
+        <label id="question" for="name">Tmp</label>
+        <input id="answer" type="text" required>
+        <label id="error" style="color: red"></label>
+      </div>
+      <div class="form-example">
+        <input type="submit" value="Antworten">
+      </div>
+    </form>
+  </section>
+
+
+
+</main>
+
+<!-- <footer>
+</footer> -->
+
+
+
+<script>
+const data = [
+  {id: "start", question: "Do you want to play a game?", 
+    answerCorrect: () => answer.value === "yes"
+  },
+  {id: "foo", question: "Seite 1: bar", answer: "bono", 
+    answerCorrect: () => answer.value === "yes"
+  },
+  {id: "bim", question: "Seite 2: benno", answer: "banjo", 
+    answerCorrect: () => answer.value === "yes"
+  },
+];
+
+const title = document.querySelector("#title");
+const reset = document.querySelector("#reset");
+
+const theForm = document.querySelector("#theForm");
+const question = document.querySelector("#question");
+const answer = document.querySelector("#answer");
+const error = document.querySelector("#error");
+
+theForm.addEventListener("submit", function(e){
+  e.preventDefault();
+
+  checkAnswer();
+});
+reset.addEventListener("click", function(){ 
+  askQuestion(0);
+}); 
+reset.style.visibility = "collapse";
+
+function checkAnswer(){
+  const currentQaIndex = currentQaIndexOrMinusOne();
+  if(currentQaIndex === -1){
+    console.warn("No current answer. Resetting");
+    askQuestion(0);
+    return;
+  }
+
+  console.info(`Answering question with ${answer.value}`);
+  const currentQa = data[currentQaIndex];
+  if(currentQa.answerCorrect()){
+    console.info("Answer correct");
+    error.innerHTML = "";
+    askQuestion(currentQaIndex + 1)
+  } else {
+    console.error("Answer wrong");
+    error.innerHTML = "Wrong";
+  }
+}
+
+function askQuestion(index){
+  if(hasWon(index)){
+    showHasWon();
+    return;
+  }
+
+  index = Math.max(0, index);
+  showTitle(index);
+
+  const qa = data[index];
+
+  question.innerHTML = qa.question;
+  answer.value = "";
+  
+  history.pushState(null, "", `#${qa.id}`);
+}
+
+function currentQaIndexOrMinusOne(){
+  const hash = window.location.hash.substr(1);
+  
+  return data.findIndex(it => it.id === hash);
+}
+
+function hasWon(index){
+  return index >= data.length;
+}
+
+function showHasWon(){
+    title.innerHTML = "Gewonnen!";
+    reset.style.visibility = "visible";
+}
+
+function showTitle(index){
+  if(index === 0){
+    title.innerHTML = "Hello there";
+  } else { 
+    title.innerHTML = "Hallo Fabian";
+  }
+}
+
+askQuestion(currentQaIndexOrMinusOne());
+
+</script>
+
+</body>
+</html>
