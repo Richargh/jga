@@ -19,6 +19,7 @@
 
 <main>
   <h1 id="title"></h1>
+  <p id="suggestion">Es ist sinnvoll die Antworten zu notieren</p>
   
   <section>
     <form id="theForm">
@@ -31,6 +32,8 @@
         <input type="submit" value="Antworten">
       </div>
     </form>
+
+    <progress id="progress" max="100" value="70">10</progress>
   </section>
 
 
@@ -58,12 +61,14 @@ const data = [
 ];
 
 const title = document.querySelector("#title");
+const suggestion = document.querySelector("#suggestion");
 const reset = document.querySelector("#reset");
 
 const theForm = document.querySelector("#theForm");
 const question = document.querySelector("#question");
 const answer = document.querySelector("#answer");
 const error = document.querySelector("#error");
+const progress = document.querySelector("#progress");
 
 theForm.addEventListener("submit", function(e){
   e.preventDefault();
@@ -73,7 +78,28 @@ theForm.addEventListener("submit", function(e){
 reset.addEventListener("click", function(){ 
   askQuestion(0);
 }); 
-reset.style.visibility = "collapse";
+reset.style.visibility = "hidden";
+suggestion.style.visibility = "hidden";
+
+function askQuestion(index){
+  if(hasWon(index)){
+    showProgress(index);
+    showHasWon();
+    return;
+  }
+
+  index = Math.max(0, index);
+
+  showTitle(index);
+  showProgress(index);
+
+  const qa = data[index];
+
+  question.innerHTML = qa.question;
+  answer.value = "";
+  
+  history.pushState(null, "", `#${qa.id}`);
+}
 
 function checkAnswer(){
   const currentQaIndex = currentQaIndexOrMinusOne();
@@ -87,28 +113,11 @@ function checkAnswer(){
   const currentQa = data[currentQaIndex];
   if(currentQa.answerCorrect()){
     error.innerHTML = "";
-    askQuestion(currentQaIndex + 1)
+    askQuestion(currentQaIndex + 1);
   } else {
     console.error(`Answer ${answer.value} is wrong`);
     error.innerHTML = "Leider falsch";
   }
-}
-
-function askQuestion(index){
-  if(hasWon(index)){
-    showHasWon();
-    return;
-  }
-
-  index = Math.max(0, index);
-  showTitle(index);
-
-  const qa = data[index];
-
-  question.innerHTML = qa.question;
-  answer.value = "";
-  
-  history.pushState(null, "", `#${qa.id}`);
 }
 
 function currentQaIndexOrMinusOne(){
@@ -131,7 +140,13 @@ function showTitle(index){
     title.innerHTML = "Hallihallo";
   } else { 
     title.innerHTML = "Hallo Fabian";
+    suggestion.style.visibility = "visible";
   }
+}
+
+function showProgress(index) {
+  progress.max = data.length;
+  progress.value = index;
 }
 
 askQuestion(currentQaIndexOrMinusOne());
