@@ -45,14 +45,14 @@
 
 <script>
 const data = [
-  {id: "start", question: "Do you want to play a game?", 
-    answerCorrect: () => answer.value === "yes"
+  {id: "start", question: "Willst du ein Spiel spielen?", 
+    answerCorrect: () => new RegExp('ja', 'i').test(answer.value)
   },
   {id: "foo", question: "Seite 1: bar", answer: "bono", 
-    answerCorrect: () => answer.value === "yes"
+    answerCorrect: () => new RegExp('zwo', 'i').test(answer.value)
   },
   {id: "bim", question: "Seite 2: benno", answer: "banjo", 
-    answerCorrect: () => answer.value === "yes"
+    answerCorrect: () => new RegExp('drei', 'i').test(answer.value)
   },
 ];
 
