@@ -26,15 +26,15 @@
     <form id="theForm">
       <div class="form-example">
         <label id="question" for="name">Tmp</label>
-        <input id="answer" type="text" required>
+        <input id="answer" type="text" placeholder="Antwort" required>
         <label id="error" style="color: red"></label>
       </div>
       <div class="form-example">
-        <input type="submit" value="Antworten">
+        <input id="submit" type="submit" value="Antworten">
       </div>
     </form>
 
-    <section id="tipps">
+    <section id="hints">
       <button id="requestHint1">Tipp 1</button>
       <button id="requestHint2">Tipp 2</button>
       <button id="requestHint3">Tipp 3</button>
@@ -93,6 +93,7 @@ const theForm = document.querySelector("#theForm");
 const question = document.querySelector("#question");
 const answer = document.querySelector("#answer");
 const error = document.querySelector("#error");
+const submit = document.querySelector("#submit");
 const progress = document.querySelector("#progress");
 
 const requestHint1 = document.querySelector("#requestHint1");
@@ -107,6 +108,7 @@ theForm.addEventListener("submit", function(e){
   checkAnswer();
 });
 reset.addEventListener("click", function(){ 
+  resetVisibility();
   askQuestion(0);
 }); 
 requestHint1.addEventListener("click", function(){ showHint(0) });
@@ -115,8 +117,6 @@ requestHint3.addEventListener("click", function(){ showHint(2) });
 
 
 
-reset.style.visibility = "hidden";
-suggestion.style.visibility = "hidden";
 
 
 
@@ -145,6 +145,7 @@ function checkAnswer(){
   const currentQaIndex = currentQaIndexOrMinusOne();
   if(currentQaIndex === -1){
     console.warn("No current answer. Resetting");
+    resetVisibility();
     askQuestion(0);
     return;
   }
@@ -192,6 +193,9 @@ function hasWon(index){
 function showHasWon(){
     title.innerHTML = "Gewonnen!";
     reset.style.visibility = "visible";
+
+    submit.style.visibility = "hidden";
+    hints.style.visibility = "hidden";
 }
 
 function showTitle(index){
@@ -208,6 +212,14 @@ function showProgress(index) {
   progress.value = index;
 }
 
+function resetVisibility(){
+  reset.style.visibility = "hidden";
+  suggestion.style.visibility = "hidden";
+  submit.style.visibility = "visible";
+  hints.style.visibility = "visible";
+}
+
+resetVisibility();
 askQuestion(currentQaIndexOrMinusOne());
 
 </script>
