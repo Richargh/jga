@@ -34,12 +34,11 @@
       </div>
     </form>
 
-    <section id="hints">
-      <button id="requestHint1">Tipp 1</button>
-      <button id="requestHint2">Tipp 2</button>
-      <button id="requestHint3">Tipp 3</button>
+    <section>
+      <label id="theHint" class="notice"></label>
+      <div id="hints">
+      </div>
     </section>
-    <label id="hint"></label>
   </article>
 
 
@@ -55,30 +54,46 @@
 <script>
 const data = [
   {
-    id: "start", question: "Willst du ein Spiel spielen?", 
-    answerCorrect: () => new RegExp('ja', 'i').test(answer.value),
+    id: "start", question: "(⚑) Wie ist der Name?",
+    answerCorrect: (answer) => new RegExp('Fabian', 'i').test(answer),
+    answerHint: (answer) => new RegExp('Pauline', 'i').test(answer)
+            ? "Die ist nicht hier."
+            : new RegExp('Roth', 'i').test(answer)
+                    ? "Der Vorname würde es tun."
+                    : null,
     hints: [
-      "Ons", 
-      "Zwe", 
-      "Dre"
+      "Reimt sich auf Gabian"
     ]
   },
   {
-    id: "foo", question: "Seite 1: bar", answer: "bono", 
-    answerCorrect: () => new RegExp('zwo', 'i').test(answer.value),
+    id: "foo", question: "(⛊) Was ist heute passiert?",
+    answerCorrect: (answer) => new RegExp('Antrag', 'i').test(answer),
+    answerHint: (answer) => new RegExp('Ring', 'i').test(answer)
+                          ? "Nah dran, bitte die Aktion benennen."
+                          : null,
     hints: [
-      "Foo", 
-      "Boo", 
-      "Doo"
+      "Was für ein Tag ist 'heute'?",
+      "Was war am 3. August 2022?",
+      "Es hat irgendwas mit einem Ring und einem Kniefall zu tun.",
+      "Es reimt sich auf Eintrag."
     ]
   },
   {
-    id: "bim", question: "Seite 2: benno", answer: "banjo", 
-    answerCorrect: () => new RegExp('drei', 'i').test(answer.value),
+    id: "bim", question: "(⛝) Was hat sich versteckt?",
+    answerCorrect: (answer) => new RegExp('Nice', 'i').test(answer),
+    answerHint: (answer) => new RegExp('Kat', 'i').test(answer) || new RegExp('Mäxchen', 'i').test(answer)
+            ? "Der Kater ist nicht versteckt."
+            : new RegExp('1001110', 'i').test(answer)
+                    ? "Das ist tatsächlich eine Seriennummer."
+                    : new RegExp('78', 'i').test(answer)
+                            ? "Das sind Zahlen, schön, aber was bedeuten sie?"
+                            : null,
     hints: [
-      "1", 
-      "2", 
-      "3"
+      "Wir suchen eine besondere Nummer auf dieser Seite.",
+      "Die Nummer ist unter dem Nokia-Handy.",
+      "Die Nummer ist irgendwie codiert.",
+      "Die Nummer ist mit der Ascii-Tabelle codiert.",
+      "Ascii hat 7 Bits. 1001110 ist die Dezimalzahl 105 und der Buchstabe N.",
     ]
   },
 ];
@@ -96,10 +111,8 @@ const error = document.querySelector("#error");
 const submit = document.querySelector("#submit");
 const progress = document.querySelector("#progress");
 
-const requestHint1 = document.querySelector("#requestHint1");
-const requestHint2 = document.querySelector("#requestHint2");
-const requestHint3 = document.querySelector("#requestHint3");
-const hint = document.querySelector("#hint");
+const theHint = document.querySelector("#theHint");
+const hints = document.querySelector("#hints");
 
 
 theForm.addEventListener("submit", function(e){
@@ -110,15 +123,7 @@ theForm.addEventListener("submit", function(e){
 reset.addEventListener("click", function(){ 
   resetVisibility();
   askQuestion(0);
-}); 
-requestHint1.addEventListener("click", function(){ showHint(0) });
-requestHint2.addEventListener("click", function(){ showHint(1) });
-requestHint3.addEventListener("click", function(){ showHint(2) });
-
-
-
-
-
+});
 
 function askQuestion(index){
   if(hasWon(index)){
@@ -136,7 +141,7 @@ function askQuestion(index){
 
   question.innerHTML = qa.question;
   answer.value = "";
-  hint.innerHTML = "";
+  renderHints(qa.hints)
   
   history.pushState(null, "", `#${qa.id}`);
 }
@@ -152,30 +157,39 @@ function checkAnswer(){
 
   console.info(`Answering question with ${answer.value}`);
   const currentQa = data[currentQaIndex];
-  if(currentQa.answerCorrect()){
+  if(currentQa.answerCorrect(answer.value)){
     error.innerHTML = "";
     askQuestion(currentQaIndex + 1);
+  } else if(currentQa.answerHint != null && currentQa.answerHint(answer.value) != null){
+    console.error(`Answer ${answer.value} is almost right`);
+    error.innerHTML = currentQa.answerHint(answer.value);
   } else {
     console.error(`Answer ${answer.value} is wrong`);
     error.innerHTML = "Leider falsch";
   }
 }
 
-function showHint(hintIndex){
-  const currentQaIndex = currentQaIndexOrMinusOne();
-  if(currentQaIndex === -1){
-    console.warn("No current answer. Resetting");
-    askQuestion(0);
-    return;
-  }
-  console.info(`Requesting hint ${hintIndex}`);
-  const currentQa = data[currentQaIndex];
-  if(hintIndex >= currentQa.hints.length){
-    hint.innerHTML = "Dieser Tipp existiert nicht";
-  } else {
-    const hintText = currentQa.hints[hintIndex];
-    hint.innerHTML = hintText;
-  }
+/**
+ * @param {string[]} hintTexts - All the hints for this question
+ */
+function renderHints(hintTexts){
+  theHint.innerHTML = "";
+  hints.innerHTML = "";
+  hintTexts.forEach((text, index) => {
+    const hintButton = document.createElement("BUTTON");
+    hintButton.appendChild(document.createTextNode(`Tipp ${index}`));
+    hintButton.addEventListener("click", function(){ showHint(text) });
+
+    hints.appendChild(hintButton);
+  })
+}
+
+/**
+ * @param {string} hintText - The hint to show
+ */
+function showHint(hintText){
+  console.info(`Showing hint text: ${hintText}`);
+  theHint.innerHTML = hintText;
 }
 
 
