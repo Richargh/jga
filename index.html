@@ -4,9 +4,16 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>title</title>
+  <title>JGA</title>
   
   <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
+  <style>
+    .hints {
+      display: flex;
+      flex-direction: row;
+      gap: 5px;
+    }
+  </style>
 </head>
 
 <body>
@@ -24,20 +31,20 @@
     <progress id="progress" max="100" value="70">10</progress>
     
     <form id="theForm">
-      <div class="form-example">
-        <label id="question" for="name">Tmp</label>
+      <div>
+        <label id="question" for="answer">Tmp</label>
         <input id="answer" type="text" placeholder="Antwort" required>
         <label id="error" style="color: red"></label>
       </div>
-      <div class="form-example">
+      <div>
         <input id="submit" type="submit" value="Antworten">
       </div>
     </form>
 
     <section>
-      <label id="theHint" class="notice"></label>
-      <div id="hints">
+      <div id="hints" class="hints">
       </div>
+      <label id="theHint" class="notice"></label>
     </section>
   </article>
 
@@ -47,14 +54,15 @@
 
 </main>
 
-<!-- <footer>
-</footer> -->
+<footer>
+  <input type="date" id="theDate" value="2023-04-01">
+</footer>
 
 
 <script>
 const data = [
   {
-    id: "start", question: "(⚑) Wie ist der Name?",
+    id: "start", question: "(⚑ Seite 1) Wie ist der Name?",
     answerCorrect: (answer) => new RegExp('Fabian', 'i').test(answer),
     answerHint: (answer) => new RegExp('Pauline', 'i').test(answer)
             ? "Die ist nicht hier."
@@ -66,11 +74,13 @@ const data = [
     ]
   },
   {
-    id: "foo", question: "(⛊) Was ist heute passiert?",
-    answerCorrect: (answer) => new RegExp('Antrag', 'i').test(answer),
+    id: "zwe", question: "(⛊ Seite 2) Was ist heute passiert?",
+    answerCorrect: (answer) => new RegExp('Antrag', 'i').test(answer) && theDate.value === "2022-08-03",
     answerHint: (answer) => new RegExp('Ring', 'i').test(answer)
-                          ? "Nah dran, bitte die Aktion benennen."
-                          : null,
+            ? "Nah dran, bitte die Aktion benennen."
+            : new RegExp('Antrag', 'i').test(answer) && theDate.value !== "2022-08-03"
+                    ? "Die Antwort stimmt, aber das war nicht heute."
+                    : null,
     hints: [
       "Was für ein Tag ist 'heute'?",
       "Was war am 3. August 2022?",
@@ -79,7 +89,7 @@ const data = [
     ]
   },
   {
-    id: "bim", question: "(⛝) Was hat sich versteckt?",
+    id: "dre", question: "(⛝ Seite 3) Was hat sich versteckt?",
     answerCorrect: (answer) => new RegExp('Nice', 'i').test(answer),
     answerHint: (answer) => new RegExp('Kat', 'i').test(answer) || new RegExp('Mäxchen', 'i').test(answer)
             ? "Der Kater ist nicht versteckt."
@@ -94,6 +104,101 @@ const data = [
       "Die Nummer ist irgendwie codiert.",
       "Die Nummer ist mit der Ascii-Tabelle codiert.",
       "Ascii hat 7 Bits. 1001110 ist die Dezimalzahl 105 und der Buchstabe N.",
+    ]
+  },
+  {
+    id: "vief", question: "(⛬ Seite 4) Was ist die Nachricht?",
+    answerCorrect: (answer) => new RegExp('Dösebacka', 'i').test(answer),
+    answerHint: (answer) => new RegExp('Doesebacka', 'i').test(answer)
+            ? "Bitte ohne Umlaut."
+            : new RegExp('36663377773322', 'i').test(answer)
+                    ? "Geht in die richtige Richtung. Doch was bedeuten diese Zahlen?"
+                    : null,
+    hints: [
+      "Irgendwo auf dieser Seite hat sich wieder etwas versteckt.",
+      "Der gekennzeichnete Download auf dieser Seite ist nicht mehr grau.",
+      "Schau dir mal die ID des gekennzeichneten Downloads an.",
+      "Wenn du in der Vergangenheit dieses Escape-Spiels schaust, kannst du den Code dann entschlüsseln?",
+      "Auf der vorigen Seite gibt es ein Nokia-Handy. Was kommt raus, wenn du die Nummer auf der Tastatur eintippst?",
+    ]
+  },
+  {
+    id: "fuef", question: "(⛾ Seite 5) Was ist der Ratschlag?",
+    answerCorrect: (answer) => new RegExp('Weglaufen', 'i').test(answer),
+    answerHint: (answer) => new RegExp('Surströmming', 'i').test(answer)
+            ? "Wir haben tatsächlich vergorenen Hering probiert. Was hätten wir anders machen können?"
+            : new RegExp('6396197', 'i').test(answer)
+                    ? "Geil, eine Telefonnumer! Ist aber leider nicht die Antwort."
+                    : null,
+    hints: [
+      "Was kann man tun, wenn ein Artikel Fehler aufweist?",
+      "Errata=Fehler, Zeitungen bieten immer eine Möglichkeit wie man die Redaktion auf Fehler aufmerksam machen kann.",
+      "Auf dieser Seite ist die Telefonnummer der Redaktion.",
+      "Am besten die Telefonnummer mal anrufen.",
+    ]
+  },
+  {
+    id: "sechse", question: "(★ Seite 6) Wie ist der Name?",
+    answerCorrect: (answer) => new RegExp('Ich&Der Andere', 'i').test(answer),
+    answerHint: (answer) => new RegExp('Andere', 'i').test(answer)
+            ? "Nah dran, wie muss man das schreiben, damit es in die Kästchen reinpasst?"
+            : null,
+    hints: [
+      "Die Werbung sieht irgendwie verdächtig aus.",
+      "Vielleicht hat jemand im Feld der Werbung etwas gekritzelt?",
+      "Da gabs doch so einen Trick mit dem Bleistift wie man etwas wieder sichtbar machen kann.",
+    ]
+  },
+  {
+    id: "sibbe", question: "(☨ Seite 7) Wer war der eigentliche Star des Films?",
+    answerCorrect: (answer) => new RegExp('Prof Brumm', 'i').test(answer),
+    answerHint: (answer) => new RegExp('Pauline', 'i').test(answer)
+            ? "Definitiv. Bei Requisiten und sogar vor der Kamera. Aber jetzt noch etwas glorreicher bitte."
+            : new RegExp('Eltern', 'i').test(answer) || new RegExp('Helena', 'i').test(answer) || new RegExp('Dietrich', 'i').test(answer)
+                    ? "Eltern unterstützen immer. Nicht die gesuchte antwort, aber schön, dass du an sie denkst."
+                    : new RegExp('Richard', 'i').test(answer)
+                    || new RegExp('Patrick', 'i').test(answer)
+                    || new RegExp('Jenny', 'i').test(answer)
+                    || new RegExp('Daniel', 'i').test(answer)
+                            ? "Na klar."
+                            : null,
+    hints: [
+      "Was ist denn die deutsche Version von Olymp und Hades?",
+      "Himmel (Olymp) und Hölle (Hades) verlangt nach Falterei.",
+      "Nach dem Falten entstehen kleine Bereiche zwischen den Falten. In diesen Bereichen gibt es schwarze Buchsteiben",
+      "Was passiert wenn wir pro Bereich die Buchstaben aufsteigend verbinden?",
+    ]
+  },
+  {
+    id: "achte", question: "(♁ Seite 8) Was ist die Lösung?",
+    answerCorrect: (answer) => new RegExp('KAS N5!', 'i').test(answer),
+    hints: [
+      "Der Kompass hat eine dunkle und eine Helle Seite. Welche sollen wir beachten?",
+      "Wir sollen auf dieser Seite nur die Yin-Pfeile nach rechts und unten des Kompass beachten. Wo hilft uns das?",
+      "Was passiert, wenn wir im Kreuzworträtsel nur die Felder schwärzen auf die ein Pfeil nach rechts oder unten zeigt?",
+    ]
+  },
+  {
+    id: "neunz", question: "(♔ Seite 9) Was haben wir außerdem in der WG gemacht?",
+    answerCorrect: (answer) => new RegExp('Sushi zocken', 'i').test(answer),
+    answerHint: (answer) => new RegExp('z0ck3n', 'i').test(answer)
+            ? "Klingt leet, wie kann man das noch schreiben?"
+            : null,
+    hints: [
+      "Lachs + Reis + Algen = ?",
+      "z0ck3n ist 1337-Speak. Wie kann man das noch schreiben",
+      "Wenn wir beide Wörter zusammenlegen ergibt das?",
+    ]
+  },
+  {
+    id: "zenz", question: "(★ Seite 10) Was ist die Antwort?",
+    answerCorrect: (answer) => new RegExp('Chefsache', 'i').test(answer),
+    answerHint: (answer) => new RegExp('Chefesache', 'i').test(answer)
+            ? "Das ist jetzt aber schon eher umgangssprachlich..."
+            : null,
+    hints: [
+      "Kucke mal da, auf dieser Seite gibt es Noten.",
+      "Noten kann man singen, aber was passiert, wenn man die Noten aufschreibt?",
     ]
   },
 ];
@@ -113,6 +218,8 @@ const progress = document.querySelector("#progress");
 
 const theHint = document.querySelector("#theHint");
 const hints = document.querySelector("#hints");
+
+const theDate = document.querySelector("#theDate");
 
 
 theForm.addEventListener("submit", function(e){
@@ -181,6 +288,7 @@ function renderHints(hintTexts){
     hintButton.addEventListener("click", function(){ showHint(text) });
 
     hints.appendChild(hintButton);
+    hints.appendChild(document.createElement("p"))
   })
 }
 
