@@ -201,6 +201,48 @@ const data = [
       "Noten kann man singen, aber was passiert, wenn man die Noten aufschreibt?",
     ]
   },
+  {
+    id: "zwelfz", question: "(♠ Seite 12) Was ist angeordnet?",
+    answerCorrect: (answer) => new RegExp('The Greatest Show', 'i').test(answer) &&  theDate.value === "2023-04-28",
+    answerHint: (answer) => new RegExp('The Greatest Show', 'i').test(answer) && theDate.value !== "2023-04-28"
+                    ? "Die Antwort stimmt, aber das ist nicht heute."
+                    : null,
+    hints: [
+      "Manche der Sendungen sind schwarz markiert.",
+      "Kannst du alles Schwarze in eine Reihenfolge bekommen?",
+      "Oh This is ...?",
+      "Wie heißt das Lied?",
+    ]
+  },
+  {
+    id: "dreiz", question: "(♨ Seite 13) Wie glücklich bist du?",
+    answerCorrect: (answer) => new RegExp('[^_^]', 'i').test(answer),
+    answerHint: (answer) => new RegExp('Sehr', 'i').test(answer) || new RegExp('Mega', 'i').test(answer)
+            ? "Glaub ich dir aber mit worten kann man das nicht so gut beschreiben."
+            : null,
+    hints: [
+      "Schau mal in die Vergangenheit. Was steht auf den vorigen Blättern?",
+      "Gibt es auf den Blättern irgendwelche Zahlen die das heutige Datum ausmachen?",
+      "Das heutige Datum findest du oben rechts auf Seite 13.",
+      "Kann man mit den römischen Zahlen das heutige Datum schreiben? Ohne Jahresangabe allerdings, wäre ein bisschen lang.",
+      "Der Punkt hinter der II. ist kein Versehen",
+      "Die römischen Zahlen die das heutige Datum ausmachen sind XX VI II.I V",
+      "Neben den römischen Zahlen gibt es doch noch so kleine Zeichen, zB ^, kann man die zu einem Smiley kombinieren?",
+    ]
+  },
+  {
+    id: "dreizzwei", question: "(# Seite 13) Der Dialog der Dialoge ist?",
+    answerCorrect: (answer) => new RegExp('willstemitmirgehn-ja', 'i').test(answer),
+    answerHint: (answer) => new RegExp('aj-', 'i').test(answer)
+            ? "Das ist doch kein Dialog! Wirkt irgendwie verkehrt herum."
+            : null,
+    hints: [
+      "Schau mal in die Vergangenheit. Wie hat die Webseite denn auf deine Antworten reagiert?",
+      "Wenn du die Lösungen eingetippt hast, hat sich die Adresszeile in deinem Browser verändert?",
+      "Schau mal was hinter dem # im Browser steht. Was passiert wenn du das Ergebnis aufschreibst? Die Zeitung hat dir dafür extra Platz gelassen.",
+      "Was passiert wenn du das jetzt alles rückwärts liest?",
+    ]
+  },
 ];
 
 
@@ -313,7 +355,7 @@ function hasWon(index){
 }
 
 function showHasWon(){
-    title.innerHTML = "Gewonnen!";
+    title.innerHTML = "Gewonnen! Der Code für das Schloss ist 123.";
     reset.style.visibility = "visible";
 
     submit.style.visibility = "hidden";
