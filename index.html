@@ -62,7 +62,7 @@
 <script>
 const data = [
   {
-    id: "start", question: "(⚑ Seite 1) Wie ist der Name?",
+    id: "lliw", question: "(⚑ Seite 1) Wie ist der Name?",
     answerCorrect: (answer) => new RegExp('Fabian', 'i').test(answer),
     answerHint: (answer) => new RegExp('Pauline', 'i').test(answer)
             ? "Die ist nicht hier."
@@ -74,7 +74,7 @@ const data = [
     ]
   },
   {
-    id: "zwe", question: "(⛊ Seite 2) Was ist heute passiert?",
+    id: "ts", question: "(⛊ Seite 2) Was ist heute passiert?",
     answerCorrect: (answer) => new RegExp('Antrag', 'i').test(answer) && theDate.value === "2022-08-03",
     answerHint: (answer) => new RegExp('Ring', 'i').test(answer)
             ? "Nah dran, bitte die Aktion benennen."
@@ -89,7 +89,7 @@ const data = [
     ]
   },
   {
-    id: "dre", question: "(⛝ Seite 3) Was hat sich versteckt?",
+    id: "me", question: "(⛝ Seite 3) Was hat sich versteckt?",
     answerCorrect: (answer) => new RegExp('Nice', 'i').test(answer),
     answerHint: (answer) => new RegExp('Kat', 'i').test(answer) || new RegExp('Mäxchen', 'i').test(answer)
             ? "Der Kater ist nicht versteckt."
@@ -107,7 +107,7 @@ const data = [
     ]
   },
   {
-    id: "vief", question: "(⛬ Seite 4) Was ist die Nachricht?",
+    id: "ti", question: "(⛬ Seite 4) Was ist die Nachricht?",
     answerCorrect: (answer) => new RegExp('Dösebacka', 'i').test(answer),
     answerHint: (answer) => new RegExp('Doesebacka', 'i').test(answer)
             ? "Bitte ohne Umlaut."
@@ -123,7 +123,7 @@ const data = [
     ]
   },
   {
-    id: "fuef", question: "(⛾ Seite 5) Was ist der Ratschlag?",
+    id: "im", question: "(⛾ Seite 5) Was ist der Ratschlag?",
     answerCorrect: (answer) => new RegExp('Weglaufen', 'i').test(answer),
     answerHint: (answer) => new RegExp('Surströmming', 'i').test(answer)
             ? "Wir haben tatsächlich vergorenen Hering probiert. Was hätten wir anders machen können?"
@@ -138,7 +138,7 @@ const data = [
     ]
   },
   {
-    id: "sechse", question: "(★ Seite 6) Wie ist der Name?",
+    id: "gr", question: "(★ Seite 6) Wie ist der Name?",
     answerCorrect: (answer) => new RegExp('Ich&Der Andere', 'i').test(answer),
     answerHint: (answer) => new RegExp('Andere', 'i').test(answer)
             ? "Nah dran, wie muss man das schreiben, damit es in die Kästchen reinpasst?"
@@ -150,7 +150,7 @@ const data = [
     ]
   },
   {
-    id: "sibbe", question: "(☨ Seite 7) Wer war der eigentliche Star des Films?",
+    id: "he", question: "(☨ Seite 7) Wer war der eigentliche Star des Films?",
     answerCorrect: (answer) => new RegExp('Prof Brumm', 'i').test(answer),
     answerHint: (answer) => new RegExp('Pauline', 'i').test(answer)
             ? "Definitiv. Bei Requisiten und sogar vor der Kamera. Aber jetzt noch etwas glorreicher bitte."
@@ -170,7 +170,7 @@ const data = [
     ]
   },
   {
-    id: "achte", question: "(♁ Seite 8) Was ist die Lösung?",
+    id: "-n", question: "(♁ Seite 8) Was ist die Lösung?",
     answerCorrect: (answer) => new RegExp('KAS N5!', 'i').test(answer),
     hints: [
       "Der Kompass hat eine dunkle und eine Helle Seite. Welche sollen wir beachten?",
@@ -179,7 +179,7 @@ const data = [
     ]
   },
   {
-    id: "neunz", question: "(♔ Seite 9) Was haben wir außerdem in der WG gemacht?",
+    id: "ua", question: "(♔ Seite 9) Was haben wir außerdem in der WG gemacht?",
     answerCorrect: (answer) => new RegExp('Sushi zocken', 'i').test(answer),
     answerHint: (answer) => new RegExp('z0ck3n', 'i').test(answer)
             ? "Klingt leet, wie kann man das noch schreiben?"
@@ -191,7 +191,7 @@ const data = [
     ]
   },
   {
-    id: "zenz", question: "(★ Seite 10) Was ist die Antwort?",
+    id: "jf", question: "(★ Seite 10) Was ist die Antwort?",
     answerCorrect: (answer) => new RegExp('Chefsache', 'i').test(answer),
     answerHint: (answer) => new RegExp('Chefesache', 'i').test(answer)
             ? "Das ist jetzt aber schon eher umgangssprachlich..."
@@ -202,7 +202,7 @@ const data = [
     ]
   },
   {
-    id: "zwelfz", question: "(♠ Seite 12) Was ist angeordnet?",
+    id: "de", question: "(♠ Seite 12) Was ist angeordnet?",
     answerCorrect: (answer) => new RegExp('The Greatest Show', 'i').test(answer) &&  theDate.value === "2023-04-28",
     answerHint: (answer) => new RegExp('The Greatest Show', 'i').test(answer) && theDate.value !== "2023-04-28"
                     ? "Die Antwort stimmt, aber das ist nicht heute."
@@ -215,7 +215,7 @@ const data = [
     ]
   },
   {
-    id: "dreiz", question: "(♨ Seite 13) Wie glücklich bist du?",
+    id: "ne", question: "(♨ Seite 13) Wie glücklich bist du?",
     answerCorrect: (answer) => new RegExp('[^_^]', 'i').test(answer),
     answerHint: (answer) => new RegExp('Sehr', 'i').test(answer) || new RegExp('Mega', 'i').test(answer)
             ? "Glaub ich dir aber mit worten kann man das nicht so gut beschreiben."
@@ -231,8 +231,8 @@ const data = [
     ]
   },
   {
-    id: "dreizzwei", question: "(# Seite 13) Der Dialog der Dialoge ist?",
-    answerCorrect: (answer) => new RegExp('willstemitmirgehn-ja', 'i').test(answer),
+    id: "finished", question: "(# Seite 13) Der Dialog der Dialoge ist?",
+    answerCorrect: (answer) => new RegExp('willstemitmirgehn-aufjeden', 'i').test(answer),
     answerHint: (answer) => new RegExp('aj-', 'i').test(answer)
             ? "Das ist doch kein Dialog! Wirkt irgendwie verkehrt herum."
             : null,
