@@ -108,9 +108,9 @@ const data = [
   },
   {
     id: "ti", question: "(⛬ Seite 4) Was ist die Nachricht?",
-    answerCorrect: (answer) => new RegExp('Dösebacka', 'i').test(answer),
-    answerHint: (answer) => new RegExp('Doesebacka', 'i').test(answer)
-            ? "Bitte ohne Umlaut."
+    answerCorrect: (answer) => new RegExp('Doesebacka', 'i').test(answer),
+    answerHint: (answer) => new RegExp('Dösebacka', 'i').test(answer)
+            ? "Bitte mit ausgeschriebenem Umlaut."
             : new RegExp('36663377773322', 'i').test(answer)
                     ? "Geht in die richtige Richtung. Doch was bedeuten diese Zahlen?"
                     : null,
@@ -160,18 +160,24 @@ const data = [
                     || new RegExp('Patrick', 'i').test(answer)
                     || new RegExp('Jenny', 'i').test(answer)
                     || new RegExp('Daniel', 'i').test(answer)
-                            ? "Na klar."
+                            ? "Waren super wichtig, sind aber nicht der eigentliche Star."
                             : null,
     hints: [
-      "Was ist denn die deutsche Version von Olymp und Hades?",
-      "Himmel (Olymp) und Hölle (Hades) verlangt nach Falterei.",
-      "Nach dem Falten entstehen kleine Bereiche zwischen den Falten. In diesen Bereichen gibt es schwarze Buchsteiben",
-      "Was passiert wenn wir pro Bereich die Buchstaben aufsteigend verbinden?",
+      "Himmel und Hölle verlangt nach Falterei.",
+      "Nach dem Falten entstehen kleine Dreiecke, Kapitel, zwischen den Falten. In diesen Bereichen gibt es schwarze Buchsteiben.",
+      "Was passiert wenn wir pro Dreieck die Buchstaben alphabetisch aufsteigend verbinden? Wir beginnen mit dem alphabetisch ersten Buchstaben (a oder b oder c oder ..) und malen eine Linie zum nächsten verfügbaren Buchstaben.",
     ]
   },
   {
     id: "-n", question: "(♁ Seite 8) Was ist die Lösung?",
     answerCorrect: (answer) => new RegExp('KAS N5!', 'i').test(answer),
+    answerHint: (answer) => new RegExp('NS!', 'i').test(answer)
+            ? "Das 'S' ist eine Zahl. Nicht N'S', sondern ...?"
+            : new RegExp('AS', 'i').test(answer) && !new RegExp('KAS', 'i').test(answer)
+                    ? "Das vor dem 'AS' soll ein Buchstabe sein. Man braucht es für Vornamen die sich auf Onrad oder Evin reimen."
+                    : new RegExp('KASN5!', 'i').test(answer)
+                            ? "Fehlt irgendwie ein Leerzeichen..."
+                            : null,
     hints: [
       "Der Kompass hat eine dunkle und eine Helle Seite. Welche sollen wir beachten?",
       "Wir sollen auf dieser Seite nur die Yin-Pfeile nach rechts und unten des Kompass beachten. Wo hilft uns das?",
@@ -183,7 +189,9 @@ const data = [
     answerCorrect: (answer) => new RegExp('Sushi zocken', 'i').test(answer),
     answerHint: (answer) => new RegExp('z0ck3n', 'i').test(answer)
             ? "Klingt leet, wie kann man das noch schreiben?"
-            : null,
+            : new RegExp('Sushizocken', 'i').test(answer)
+                    ? "Bitte nicht einfach Wörter ausprobieren. Die Lösung passt genau in die Boxen auf der Zeitung."
+                    : null,
     hints: [
       "Lachs + Reis + Algen = ?",
       "z0ck3n ist 1337-Speak. Wie kann man das noch schreiben",
@@ -191,13 +199,16 @@ const data = [
     ]
   },
   {
-    id: "jf", question: "(★ Seite 10) Was ist die Antwort?",
+    id: "jf", question: "(★ Seite 10) Was ist die Kommunikation?",
     answerCorrect: (answer) => new RegExp('Chefsache', 'i').test(answer),
     answerHint: (answer) => new RegExp('Chefesache', 'i').test(answer)
             ? "Das ist jetzt aber schon eher umgangssprachlich..."
-            : null,
+            : new RegExp('Chefeache', 'i').test(answer)
+                    ? "Das ist kein Wort. Bitte korrekt kommunizieren."
+                    : null,
     hints: [
-      "Kucke mal da, auf dieser Seite gibt es Noten.",
+      "Wo auf dieser Seite gibt es Musik?",
+      "Wo auf dieser Seite gibt es denn Noten?",
       "Noten kann man singen, aber was passiert, wenn man die Noten aufschreibt?",
     ]
   },
@@ -216,9 +227,9 @@ const data = [
   },
   {
     id: "ne", question: "(♨ Seite 13) Wie glücklich bist du?",
-    answerCorrect: (answer) => new RegExp('[^_^]', 'i').test(answer),
+    answerCorrect: (answer) => answer.contains('[^_^]') || answer.contains('[^-^]'),
     answerHint: (answer) => new RegExp('Sehr', 'i').test(answer) || new RegExp('Mega', 'i').test(answer)
-            ? "Glaub ich dir aber mit worten kann man das nicht so gut beschreiben."
+            ? "Glaub ich dir aber mit Worten aber kannst du das auch mit Zeichen beschreiben?"
             : null,
     hints: [
       "Schau mal in die Vergangenheit. Was steht auf den vorigen Blättern?",
