@@ -41,6 +41,21 @@
       </div>
     </form>
 
+    <form id="theMysteryForm" class="notice">
+      <h4>Aktionen</h4>
+      <p id="thingTracker"></p>
+      <div>
+        <input id="mysteryThing" type="text" placeholder="VERDÄCHTIGER | ORT | GEGENSTAND" required>
+      </div>
+      <div>
+        <input id="doView" type="submit" value="ANSCHAUEN">
+        <input id="doInterview" type="submit" value="BEFRAGEN">
+        <input id="doExamine" type="submit" value="UNTERSUCHEN">
+        <input id="doPower" type="submit" value="KRAFT">
+      </div>
+      <label id="mysteryAnswer"></label>
+    </form>
+
     <section>
       <div id="hints" class="hints">
       </div>
@@ -213,6 +228,12 @@ const data = [
     ]
   },
   {
+    id: "blubb", question: "(♲ Seite 11) TÄTER MOTIV TATWAFFE ORT ZEIT?", isMystery: true,
+    answerCorrect: (answer) => new RegExp('Sänger', 'i').test(answer) && new RegExp('Macht', 'i').test(answer)
+            && new RegExp('Colt', 'i').test(answer) && new RegExp('03:44', 'i').test(answer) && new RegExp('Suite', 'i').test(answer),
+    hints: []
+  },
+  {
     id: "de", question: "(♠ Seite 12) Was ist angeordnet?",
     answerCorrect: (answer) => new RegExp('The Greatest Show', 'i').test(answer) &&  theDate.value === "2023-04-28",
     answerHint: (answer) => new RegExp('The Greatest Show', 'i').test(answer) && theDate.value !== "2023-04-28"
@@ -257,6 +278,246 @@ const data = [
 ];
 
 
+const viewAction = 'view';
+const examineAction = 'examine';
+const interviewAction = 'interview';
+const powerAction = 'power';
+
+// Suspects
+const mDrummer = 'DRUMMER';
+const mKugel = 'KUGEL';
+const mYin = 'YIN-HALSKETTE';
+
+const mBassist = 'BASSIST';
+const mBeretta = 'BERETTA';
+
+const mGitarrist = 'GITARRIST';
+
+const mSaenger = 'SÄNGER';
+
+// Locations
+const mBalkon = 'BALKON';
+const mMuelleimer = 'MÜLLEIMER';
+const mGummihandschuhe = 'GUMMIHANDSCHUHE';
+const mColt = 'COLT';
+
+const mFlur = 'FLUR';
+
+const mStudio = 'STUDIO';
+const mKassette = 'KASSETTE';
+
+const mJsuite = 'JSUITE';
+const mTagebuch = 'TAGEBUCH';
+
+const mSuite = 'SUITE';
+const mSpiegel = 'SPIEGEL';
+const mKnaeul = 'KNÄUL';
+const mArztBrief = 'ARZTBRIEF';
+const mYang = 'YANG-HALSKETTE';
+
+const mMaisonette = 'MAISONETTE';
+const mZeitung = 'ZEITUNG';
+const mKassettenKoffer = 'KASSETTENKOFFER';
+
+const mysteries = [
+        // DRUMMER
+        {
+          thing: mDrummer,
+          actions: new Map([
+            [viewAction, `Ein Muskelberg dessen Muskeln auch Muskeln haben. Wirkt sehr tod.`],
+            [interviewAction, `Du überlegst dein Ouija-Board zu nutzen, entscheidest dich aber dagegen. Die Leute sind noch nicht bereit dafür.`],
+            [examineAction, `Er trägt eine ${link(mYin)}. Eine ${link(mKugel)} steckt in seiner Brust. Todeszeitpunkt etwa 01:45.`],
+            [powerAction, `Du schiebst ihn von der Tür weg. Man kann sie wieder normal öffnen. Unter ihm liegt nix.`],
+          ])
+        },
+        {
+          thing: mKugel,
+          actions: new Map([
+            [viewAction, `Die ${link(mKugel)} die den ${link(mDrummer)} umgebracht hat.`],
+            [examineAction, `Die ${link(mKugel)} stammt aus einer Pistole.`],
+            [powerAction, `Du drückst die ${link(mKugel)} mit aller Macht zusammen. Die ${link(mKugel)} ist mächtiger und verformt sich nicht.`],
+          ])
+        },
+        {
+          thing: mYin,
+          actions: new Map([
+            [viewAction, `Das schwarze Yin-Symbol von Yin&Yang. Etwas kitschig.`],
+            [examineAction, `Scheint geteilt worden zu sein. Die Yang-Hälfte muss wo anders sein.`],
+          ])
+        },
+        // BASSIST
+        {
+          thing: mBassist,
+          actions: new Map([
+            [viewAction, `Lange Dreadlocks und an seiner rechten Hand fehlt ein Finger. Er wirkt etwas benebelt und abwesend.`],
+            [interviewAction, `Um ~03:00 habe ich angefangen Mohrhun zu spielen. ${link(mSaenger)} kam vielleicht 20 minuten später dazu, wollte aber nicht mitschießen. Um 03:40 ist ${link(mSaenger)} dann gegangen und 5 Minuten später habe ich einen Schuss von hinter der Mohrhuhnwand gehört. Ich bin nachsehen gegangen und habe zuerst bei ${link(mDrummer)} geklopft. Als er nicht antwortete bin ich reingegangen und habe seine Leiche gefunden und aufgeschrien.`],
+            [examineAction, `Seine Arme sind tätowiert mit weißen Tauben. Neben allerhand Drogen die er am und im Körper hat, ist sein ganzer Körper von oben bis unten auch voller Schießpulver. Er hat kürzlich diverse Schusswaffen abgefeurt. Eine ${link(mBeretta)} trägt er noch bei sich.`],
+            [powerAction, `Du willst ihn schubsen, doch er weicht dir aus. Oder vielleicht ist er aus dem Weg getorckelt. Du bist dir nicht ganz sicher.`],
+          ])
+        },
+        {
+          thing: mBeretta,
+          actions: new Map([
+            [viewAction, `Eine Beretta 92.`],
+            [examineAction, `Die Kugeln ähneln nicht der Kugel im Opfer. Diese Pistole hat ihn nicht getötet.`],
+          ])
+        },
+        // GITARRIST
+        {
+          thing: mGitarrist,
+          actions: new Map([
+            [viewAction, `Spargel auf zwei Beinen.`],
+            [interviewAction, `Ich war in meinem Bett. Geschlafen habe ich nicht, dafür war ${link(mBassist)} viel zu laut. Um ~03:40 habe ich auf dem ${link(mBalkon)} eine, vielleicht zwei Kippen geraucht. Kurz darauf kam ${link(mSaenger)} zu mir und hat mitgeraucht. Als ${link(mBassist)} schrie bin ich sofort losgerannt um ihm zu helfen.`],
+            [examineAction, `Er hat eine leere Zigarettenschachtel bei sich. Sonst hat er nichts an außer seinem Morgenmantel. Stinkt nach allem möglichen. Auch qualm.`],
+            [powerAction, `Du schubst ihn um, er gibt klein bei und steht wieder auf.`],
+          ])
+        },
+        // SAENGER
+        {
+          thing: mSaenger,
+          actions: new Map([
+            [viewAction, `Seine Wampe könnte davon profitieren mal etwas Sport zu machen. Die Krone auf seinem Kopf wirkt doch etwas dekadent.`],
+            [interviewAction, `Um ~03:20 habe ich das Zimmer von ${link(mBassist)} betreten und gegen ~03:40 habe ich es wieder verlassen. ${link(mBassist)} hat die ganze Zeit geballert und der Alkohol ist nicht gut genug um die Langeweile zu überbrücken. Danach bin ich auf den Balkon zu ${link(mGitarrist)} gegangen. Als ${link(mBassist)} bin ich sofort mitgekommen, um ihm zu helfen.`],
+            [examineAction, `Stinkt wie eine Gosse auf zwei Beinen. Der Körper ist voller Schießpulver.`],
+            [powerAction, `Du schubst ihn, er fällt zu Boden und schreit auf. Naja eher ein Krächzen als ein Schrei aber begeistert ist er nicht. Er steht auf, richtet seine Krone und blickt dich drohend an.`],
+          ])
+        },
+
+        /// RÄUME
+        // FLUR
+        {
+          thing: mFlur,
+          actions: new Map([
+            [viewAction, `Ein Flur. Von ihm aus gehen Türen zum ${link(mBalkon)}, ${link(mStudio)}, ${link(mJsuite)}, ${link(mSuite)} und ${link(mMaisonette)}.`],
+            [examineAction, `Du findest nichts Erwähnenwertes.`],
+          ])
+        },
+  // BALKON
+  {
+    thing: mBalkon,
+    actions: new Map([
+      [viewAction, `Ein Hotelbalkon mit Ausblick auf die Stadt. Die gesamte Stadt. Du warst noch nie so hoch oben.`],
+      [examineAction, `Du findest zwei Kippen auf dem Boden und einen ${link(mMuelleimer)}.`],
+    ])
+  },
+  {
+    thing: mMuelleimer,
+    actions: new Map([
+      [viewAction, `Der Mülleimer auf dem ${link(mBalkon)}. Aus Marmor. Warum auch nicht.`],
+      [examineAction, `Du findest einen **COLT** und ein paar **GUMMIHANDSCHUHE**`],
+    ])
+  },
+  {
+    thing: mGummihandschuhe,
+    actions: new Map([
+      [viewAction, `Dreckige GUMMIHANDSCHUHE. Etwas sagt dir, dass du sie nicht untersuchen solltest. `],
+      [examineAction, `Sperma! Die GUMMIHANDSCHUHE sind voller Sperma. Natürlich musste es eklig sein. Außerdem noch Schießpulver. Da sich die Handschuhe um den COLT gewickelt haben ist nicht klar, ob das Pulver von der Waffe abgefärbt hat oder die Handschuhe zum Feuern der Waffe genutzt wurden.`],
+      [powerAction, `Nein. Zu eklig auch nur eine Sekunde länger anzufassen.`],
+    ])
+  },
+  {
+    thing: mColt,
+    actions: new Map([
+      [viewAction, `Eine COLT 1911 Pistole.`],
+      [examineAction, `Die Pistole wurde kürzlich gefeuert. Die KUGEL steckt eindeutig im Körper von DRUMMER. Auf der Waffe sind die Fingerabdrücke aller Bandmitglieder.`],
+    ])
+  },
+
+  // STUDIO
+  {
+    thing: mStudio,
+    actions: new Map([
+      [viewAction, `Das Zimmer vom DRUMMER. Kleiner als die anderen drei Zimmer. Vollgestellt mit Fitnessgeräten. Zwei Türen führen in das Zimmer rein. Die linke Tür, die nahe dem Balkon, ist von der Leiche vom DRUMMER blockiert. `],
+      [examineAction, `In einem großen Wandschrank findest du diverse Pokale. Anscheinend war dieser Drummer mal Bass in einer A cappella Gruppe. In einem der Pokale findest du eine **KASSETTE** mit der Aufschrift "finaler Schrei".`],
+    ])
+  },
+  {
+    thing: mKassette,
+    actions: new Map([
+      [viewAction, `Die KASSETTE aus dem STUDIO vom DRUMMER.`],
+      [examineAction, `Du spielst die KASSETTE ab und hörst den Gesang von SÄNGER, keine Instrumente. Die Kassette endet mit einen schrillen Schrei. `],
+    ])
+  },
+
+  // JSUITE
+  {
+    thing: mJsuite,
+    actions: new Map([
+      [viewAction, `Die Junior Suite vom BASSISTen. Das zweitkleinste Zimmer. Die Wand gegenüber von der Tür ist voller Einschusslöcher. Ein Beamer projeziert das Spiel Mohrhuhn auf die Wand. Die Wand rechts von der Tür ist voller Waffen. Unter dem Bett ist ein **TAGEBUCH**.`],
+      [examineAction, `Die Einschusslöcher sind von unterschiedlichen Waffen. Es kostet dich viel zu viel Zeit aber du holst alle Kugeln aus der Wand und untersuchst zu welchen Waffen sie gehören. Ein paar der Kugeln kannst du keine Waffen zuordnen. Insgesamt fehlen an der Wand zwei Waffen, vermutlich Pistolen.`],
+    ])
+  },
+  {
+    thing: mTagebuch,
+    actions: new Map([
+      [viewAction, `Das TAGEBUCH vom BASSISTen.`],
+      [examineAction, `Viele Einträge mit Noten. D, D, D, D, E, E, D, D, D, ... Danach eine Seite in der sich BASSIST darüber aufregt, dass sie die Tour pausieren. Mehrere Seiten sind vollgeschrieben von "All work and no play makes Jack a dull boy". Danach kein Eintrag mehr.`],
+    ])
+  },
+
+  // SUITE
+  {
+    thing: mSuite,
+    actions: new Map([
+      [viewAction, `Die SUITE des GITARRISTen. Eine Goldene Schallplatte schmückt eine Wand, eine goldene Liebesschaukel hängt im Raum und der Betthimmel leuchtet auch golden. Einzig der Wandhohe **SPIEGEL** im Raum passt nicht zum sonstigen Schick im Raum, da er einen sehr unschönen und großen Riss vorweist.`],
+      [examineAction, `Sowohl Liebesschaukel wie Bett wurden kürzlich benutzt. Immer diese notgeilen Musiker. Auf dem Nachttisch neben dem Bett findest du ein **KNÄUL** Papier und eine **YANG-HALSKETTE**.`],
+    ])
+  },
+  {
+    thing: mSpiegel,
+    actions: new Map([
+      [viewAction, `Ein Spiegel. Ein Riss geht quer durch. Eine analoge Uhr ist in den Spiegel eingelassen und um 02:44 stehngeblieben.`],
+      [examineAction, `Der Riss im Spiegel scheint durch ein melonengroßes Objekt verursacht worden zu sein.`],
+      [powerAction, `Du stemmst dich mit aller Macht gegen den Spiegel. Der Spiegel schwingt auf und du blickst genau auf die Leiche vom DRUMMER im STUDIO.`],
+    ])
+  },
+  {
+    thing: mKnaeul,
+    actions: new Map([
+      [viewAction, `Ein mit Kraft zusammengeknäultes Stück Papier.`],
+      [powerAction, `Du wendest all deine Kraft an das Papier wieder zu entknäulen. Du findest einen Teil eines **ARZTBRIEF**.`],
+    ])
+  },
+  {
+    thing: mArztBrief,
+    actions: new Map([
+      [viewAction, `Der Brief von einem Arzt. Jemand hat die Seite zusammengeknüllt und danach wieder entfaltet. Der Bericht entschuldigt sich ausdrücklich für den langsamen Heilungsprozess und empfiehlt es ruhig anzugehen und zu warten.`],
+      [examineAction, `Die Handschrift ist von einem echten Arzt. Kaum lesbar.`],
+      [powerAction, `Du zerknäulst den Brief wieder. Warum weißt du nicht genau.`],
+    ])
+  },
+  {
+    thing: mYang,
+    actions: new Map([
+      [viewAction, `Das weiße Yang-Symbol von Yin&Yang. Etwas kitschig.`],
+      [examineAction, `Scheint in zwei geteilt worden zu sein. Die andere Hälfte muss wo anders sein.`],
+    ])
+  },
+
+  // MAISONETTE
+  {
+    thing: mMaisonette,
+    actions: new Map([
+      [viewAction, `Das Maisonette vom SÄNGER. Geschirr und Möbel sind von Diamenten geschmückt. Echte? An den Wänden gibt es ein paar Platin-Schallplatten.`],
+      [examineAction, `Es sind tatsächlich echte Diamanten. Im Schreibtisch vom SÄNGER findest du eine **ZEITUNG**, im Wandschrank ein **KASSETTENKOFFER**.`],
+    ])
+  },
+  {
+    thing: mZeitung,
+    actions: new Map([
+      [viewAction, `Eine Musikerzeitung mit vielen Artikeln. Die Coverstory dreht sich um die lange Freundschaft SÄNGER und GITARRIST von Shrillride. "Wir erzählen uns alles, es gibt keine Geheimnisse". Beide freuen sich nach einer längeren Pause endlich wieder weiter touren zu können. `],
+      [examineAction, `Nichts zu untersuchen in der Zeitung.`],
+    ])
+  },
+  {
+    thing: mKassettenKoffer,
+    actions: new Map([
+      [viewAction, `Ein Koffer voller Kassetten. Eine Kassette fehlt.`],
+      [examineAction, `Alle Kassetten sind vollgespielt mit dem Gesang von SÄNGER. Dir kommt kein Lied bekannt vor aber du bist auch kein Fan von Shrillride.`],
+    ])
+  },
+];
+const thingMemory = [];
 
 const title = document.querySelector("#title");
 const suggestion = document.querySelector("#suggestion");
@@ -272,6 +533,17 @@ const progress = document.querySelector("#progress");
 const theHint = document.querySelector("#theHint");
 const hints = document.querySelector("#hints");
 
+
+const theMysteryForm = document.querySelector("#theMysteryForm");
+const mysteryThing = document.querySelector("#mysteryThing");
+const mysteryAnswer = document.querySelector("#mysteryAnswer");
+const thingTracker = document.querySelector("#thingTracker");
+const doView = document.querySelector("#doView");
+const doExamine = document.querySelector("#doExamine");
+const doInterview = document.querySelector("#doInterview");
+const doPower = document.querySelector("#doPower");
+
+
 const theDate = document.querySelector("#theDate");
 
 
@@ -284,6 +556,11 @@ reset.addEventListener("click", function(){
   resetVisibility();
   askQuestion(0);
 });
+
+doView.addEventListener("click", function(){ answerMystery(mysteryThing.value, viewAction); });
+doExamine.addEventListener("click", function(){ answerMystery(mysteryThing.value, examineAction); });
+doInterview.addEventListener("click", function(){ answerMystery(mysteryThing.value, interviewAction); });
+doPower.addEventListener("click", function(){ answerMystery(mysteryThing.value, powerAction); });
 
 function askQuestion(index){
   if(hasWon(index)){
@@ -298,6 +575,11 @@ function askQuestion(index){
   showProgress(index);
 
   const qa = data[index];
+  if(isMystery(qa)){
+    showMystery();
+  } else {
+    hideMystery();
+  }
 
   question.innerHTML = qa.question;
   answer.value = "";
@@ -353,7 +635,34 @@ function showHint(hintText){
   theHint.innerHTML = hintText;
 }
 
+function answerMystery(thing, action){
+  mysteryAnswer.innerHTML = findMysteryAnswer(thing, action);
+}
 
+function findMysteryAnswer(thing, action){
+  const regex = new RegExp(thing, 'i');
+  const mystery = mysteries.find(it => regex.test(it.thing));
+  if(mystery == null)
+    return "Dieses Ding existiert nicht."
+
+  addToThingMemory(thing);
+  renderThingTracker();
+  return mystery.actions.get(action) ?? "Das kannst du nicht.";
+}
+
+function addToThingMemory(thing){
+  if(thingMemory.find(it => it === thing))
+    return;
+
+  thingMemory.unshift(thing);
+  if(thingMemory.length > 5){
+    thingMemory.pop();
+  }
+}
+
+function renderThingTracker(){
+  thingTracker.innerHTML = thingMemory.map(it => link(it)).join(' - ');
+}
 
 function currentQaIndexOrMinusOne(){
   const hash = window.location.hash.substr(1);
@@ -363,6 +672,18 @@ function currentQaIndexOrMinusOne(){
 
 function hasWon(index){
   return index >= data.length;
+}
+
+function isMystery(qa){
+  return qa.isMystery ?? false;
+}
+
+function link(value){
+  return `<b onclick='selectThing("${value}")'>${value}</b>`;
+}
+
+function selectThing(thing){
+  mysteryThing.value = thing;
 }
 
 function showHasWon(){
@@ -387,11 +708,21 @@ function showProgress(index) {
   progress.value = index;
 }
 
+function showMystery(){
+  theMysteryForm.style.visibility = "visible";
+}
+
+function hideMystery(){
+  theMysteryForm.style.visibility = "hidden";
+}
+
 function resetVisibility(){
   reset.style.visibility = "hidden";
   suggestion.style.visibility = "hidden";
   submit.style.visibility = "visible";
   hints.style.visibility = "visible";
+
+  theMysteryForm.style.visibility = "hidden";
 }
 
 resetVisibility();
