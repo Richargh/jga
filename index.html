@@ -77,7 +77,7 @@
 <script>
 const data = [
   {
-    id: "lliw", question: "(⚑ Seite 1) Wie ist der Name?",
+    id: "iw", question: "(⚑ Seite 1) Wie ist der Name?",
     answerCorrect: (answer) => new RegExp('Fabian', 'i').test(answer),
     answerHint: (answer) => new RegExp('Pauline', 'i').test(answer)
             ? "Die ist nicht hier."
@@ -89,7 +89,7 @@ const data = [
     ]
   },
   {
-    id: "ts", question: "(⛊ Seite 2) Was ist heute passiert?",
+    id: "ll", question: "(⛊ Seite 2) Was ist heute passiert?",
     answerCorrect: (answer) => new RegExp('Antrag', 'i').test(answer) && theDate.value === "2022-08-03",
     answerHint: (answer) => new RegExp('Ring', 'i').test(answer)
             ? "Nah dran, bitte die Aktion benennen."
@@ -104,7 +104,7 @@ const data = [
     ]
   },
   {
-    id: "me", question: "(⛝ Seite 3) Was hat sich versteckt?",
+    id: "ts", question: "(⛝ Seite 3) Was hat sich versteckt?",
     answerCorrect: (answer) => new RegExp('Nice', 'i').test(answer),
     answerHint: (answer) => new RegExp('Kat', 'i').test(answer) || new RegExp('Mäxchen', 'i').test(answer)
             ? "Der Kater ist nicht versteckt."
@@ -122,7 +122,7 @@ const data = [
     ]
   },
   {
-    id: "ti", question: "(⛬ Seite 4) Was ist die Nachricht?",
+    id: "me", question: "(⛬ Seite 4) Was ist die Nachricht?",
     answerCorrect: (answer) => new RegExp('Doesebacka', 'i').test(answer),
     answerHint: (answer) => new RegExp('Dösebacka', 'i').test(answer)
             ? "Bitte mit ausgeschriebenem Umlaut."
@@ -138,7 +138,7 @@ const data = [
     ]
   },
   {
-    id: "im", question: "(⛾ Seite 5) Was ist der Ratschlag?",
+    id: "ti", question: "(⛾ Seite 5) Was ist der Ratschlag?",
     answerCorrect: (answer) => new RegExp('Weglaufen', 'i').test(answer),
     answerHint: (answer) => new RegExp('Surströmming', 'i').test(answer)
             ? "Wir haben tatsächlich vergorenen Hering probiert. Was hätten wir anders machen können?"
@@ -153,7 +153,7 @@ const data = [
     ]
   },
   {
-    id: "gr", question: "(★ Seite 6) Wie ist der Name?",
+    id: "im", question: "(★ Seite 6) Wie ist der Name?",
     answerCorrect: (answer) => new RegExp('Ich&Der Andere', 'i').test(answer),
     answerHint: (answer) => new RegExp('Andere', 'i').test(answer)
             ? "Nah dran, wie muss man das schreiben, damit es in die Kästchen reinpasst?"
@@ -165,7 +165,7 @@ const data = [
     ]
   },
   {
-    id: "he", question: "(☨ Seite 7) Wer war der eigentliche Star des Films?",
+    id: "gr", question: "(☨ Seite 7) Wer war der eigentliche Star des Films?",
     answerCorrect: (answer) => new RegExp('Prof Brumm', 'i').test(answer),
     answerHint: (answer) => new RegExp('Pauline', 'i').test(answer)
             ? "Definitiv. Bei Requisiten und sogar vor der Kamera. Aber jetzt noch etwas glorreicher bitte."
@@ -184,7 +184,7 @@ const data = [
     ]
   },
   {
-    id: "-n", question: "(♁ Seite 8) Was ist die Lösung?",
+    id: "he", question: "(♁ Seite 8) Was ist die Lösung?",
     answerCorrect: (answer) => new RegExp('KAS N5!', 'i').test(answer),
     answerHint: (answer) => new RegExp('NS!', 'i').test(answer)
             ? "Das 'S' ist eine Zahl. Nicht N'S', sondern ...?"
@@ -200,7 +200,7 @@ const data = [
     ]
   },
   {
-    id: "ua", question: "(♔ Seite 9) Was haben wir außerdem in der WG gemacht?",
+    id: "-n", question: "(♔ Seite 9) Was haben wir außerdem in der WG gemacht?",
     answerCorrect: (answer) => new RegExp('Sushi zocken', 'i').test(answer),
     answerHint: (answer) => new RegExp('z0ck3n', 'i').test(answer)
             ? "Klingt leet, wie kann man das noch schreiben?"
@@ -214,7 +214,7 @@ const data = [
     ]
   },
   {
-    id: "jf", question: "(★ Seite 10) Was ist die Kommunikation?",
+    id: "ua", question: "(★ Seite 10) Was ist die Kommunikation?",
     answerCorrect: (answer) => new RegExp('Chefsache', 'i').test(answer),
     answerHint: (answer) => new RegExp('Chefesache', 'i').test(answer)
             ? "Das ist jetzt aber schon eher umgangssprachlich..."
@@ -228,7 +228,7 @@ const data = [
     ]
   },
   {
-    id: "blubb", question: "(♲ Seite 11) TÄTER MOTIV TATWAFFE ORT ZEIT?", isMystery: true,
+    id: "jf", question: "(♲ Seite 11) TÄTER MOTIV TATWAFFE ORT ZEIT?", isMystery: true,
     answerCorrect: (answer) => new RegExp('Sänger', 'i').test(answer) && new RegExp('Macht', 'i').test(answer)
             && new RegExp('Colt', 'i').test(answer) && new RegExp('03:44', 'i').test(answer) && new RegExp('Suite', 'i').test(answer),
     hints: []
