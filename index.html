@@ -406,14 +406,14 @@ const mysteries = [
     thing: mMuelleimer,
     actions: new Map([
       [viewAction, `Der Mülleimer auf dem ${link(mBalkon)}. Aus Marmor. Warum auch nicht.`],
-      [examineAction, `Du findest einen **COLT** und ein paar **GUMMIHANDSCHUHE**`],
+      [examineAction, `Du findest einen ${link(mColt)} und ein paar ${link(mGummihandschuhe)}`],
     ])
   },
   {
     thing: mGummihandschuhe,
     actions: new Map([
-      [viewAction, `Dreckige GUMMIHANDSCHUHE. Etwas sagt dir, dass du sie nicht untersuchen solltest. `],
-      [examineAction, `Sperma! Die GUMMIHANDSCHUHE sind voller Sperma. Natürlich musste es eklig sein. Außerdem noch Schießpulver. Da sich die Handschuhe um den COLT gewickelt haben ist nicht klar, ob das Pulver von der Waffe abgefärbt hat oder die Handschuhe zum Feuern der Waffe genutzt wurden.`],
+      [viewAction, `Dreckige ${link(mGummihandschuhe)}. Etwas in dir fleht dich an, dass du sie nicht untersuchen sollst. `],
+      [examineAction, `Sperma! Die ${link(mGummihandschuhe)} sind voller Sperma. Natürlich musste es eklig sein. Außerdem noch Schießpulver. Da sich die Handschuhe um den ${link(mColt)} gewickelt haben ist nicht klar, ob das Pulver von der Waffe abgefärbt hat oder die Handschuhe zum Feuern der Waffe genutzt wurden.`],
       [powerAction, `Nein. Zu eklig auch nur eine Sekunde länger anzufassen.`],
     ])
   },
@@ -421,7 +421,7 @@ const mysteries = [
     thing: mColt,
     actions: new Map([
       [viewAction, `Eine COLT 1911 Pistole.`],
-      [examineAction, `Die Pistole wurde kürzlich gefeuert. Die KUGEL steckt eindeutig im Körper von DRUMMER. Auf der Waffe sind die Fingerabdrücke aller Bandmitglieder.`],
+      [examineAction, `Die Pistole wurde kürzlich gefeuert. Die ${link(mKugel)} steckt eindeutig im Körper von ${link(mDrummer)}. Auf der Waffe sind die Fingerabdrücke aller Bandmitglieder.`],
     ])
   },
 
@@ -429,15 +429,15 @@ const mysteries = [
   {
     thing: mStudio,
     actions: new Map([
-      [viewAction, `Das Zimmer vom DRUMMER. Kleiner als die anderen drei Zimmer. Vollgestellt mit Fitnessgeräten. Zwei Türen führen in das Zimmer rein. Die linke Tür, die nahe dem Balkon, ist von der Leiche vom DRUMMER blockiert. `],
-      [examineAction, `In einem großen Wandschrank findest du diverse Pokale. Anscheinend war dieser Drummer mal Bass in einer A cappella Gruppe. In einem der Pokale findest du eine **KASSETTE** mit der Aufschrift "finaler Schrei".`],
+      [viewAction, `Das Zimmer vom ${link(mDrummer)}. Kleiner als die anderen drei Zimmer. Vollgestellt mit Fitnessgeräten. Zwei Türen führen in das Zimmer rein. Die linke Tür, die nahe dem ${link(mBalkon)}, ist von der Leiche vom ${link(mDrummer)} blockiert. `],
+      [examineAction, `In einem großen Wandschrank findest du diverse Pokale. Anscheinend war dieser Drummer mal Bass in einer A cappella Gruppe, PENTA-irgendwas. In einem der Pokale findest du eine ${link(mKassette)} mit der Aufschrift "finaler Schrei".`],
     ])
   },
   {
     thing: mKassette,
     actions: new Map([
-      [viewAction, `Die KASSETTE aus dem STUDIO vom DRUMMER.`],
-      [examineAction, `Du spielst die KASSETTE ab und hörst den Gesang von SÄNGER, keine Instrumente. Die Kassette endet mit einen schrillen Schrei. `],
+      [viewAction, `Die ${link(mKassette)} aus dem ${link(mStudio)} vom ${link(mDrummer)}.`],
+      [examineAction, `Du spielst die ${link(mKassette)} ab und hörst den Gesang von ${link(mSaenger)}, keine Instrumente. Die ${link(mKassette)} endet mit einen schrillen Schrei.`],
     ])
   },
 
@@ -445,15 +445,15 @@ const mysteries = [
   {
     thing: mJsuite,
     actions: new Map([
-      [viewAction, `Die Junior Suite vom BASSISTen. Das zweitkleinste Zimmer. Die Wand gegenüber von der Tür ist voller Einschusslöcher. Ein Beamer projeziert das Spiel Mohrhuhn auf die Wand. Die Wand rechts von der Tür ist voller Waffen. Unter dem Bett ist ein **TAGEBUCH**.`],
+      [viewAction, `Die Junior Suite vom ${link(mBassist)}en. Das zweitkleinste Zimmer. Die Wand gegenüber von der Tür ist voller Einschusslöcher. Ein Beamer projeziert das Spiel Mohrhuhn auf die Wand. Die Wand rechts von der Tür ist voller Waffen. Unter dem Bett ist ein ${link(mTagebuch)}.`],
       [examineAction, `Die Einschusslöcher sind von unterschiedlichen Waffen. Es kostet dich viel zu viel Zeit aber du holst alle Kugeln aus der Wand und untersuchst zu welchen Waffen sie gehören. Ein paar der Kugeln kannst du keine Waffen zuordnen. Insgesamt fehlen an der Wand zwei Waffen, vermutlich Pistolen.`],
     ])
   },
   {
     thing: mTagebuch,
     actions: new Map([
-      [viewAction, `Das TAGEBUCH vom BASSISTen.`],
-      [examineAction, `Viele Einträge mit Noten. D, D, D, D, E, E, D, D, D, ... Danach eine Seite in der sich BASSIST darüber aufregt, dass sie die Tour pausieren. Mehrere Seiten sind vollgeschrieben von "All work and no play makes Jack a dull boy". Danach kein Eintrag mehr.`],
+      [viewAction, `Das ${link(mTagebuch)} vom ${link(mBassist)}en.`],
+      [examineAction, `Viele Einträge mit Noten. D, D, D, D, E, E, D, D, D, ... Danach eine Seite in der sich ${link(mBassist)} darüber aufregt, dass sie die Tour pausieren. Mehrere Seiten sind vollgeschrieben von "All work and no play makes Jack a dull boy". Danach kein Eintrag mehr.`],
     ])
   },
 
@@ -461,8 +461,8 @@ const mysteries = [
   {
     thing: mSuite,
     actions: new Map([
-      [viewAction, `Die SUITE des GITARRISTen. Eine Goldene Schallplatte schmückt eine Wand, eine goldene Liebesschaukel hängt im Raum und der Betthimmel leuchtet auch golden. Einzig der Wandhohe **SPIEGEL** im Raum passt nicht zum sonstigen Schick im Raum, da er einen sehr unschönen und großen Riss vorweist.`],
-      [examineAction, `Sowohl Liebesschaukel wie Bett wurden kürzlich benutzt. Immer diese notgeilen Musiker. Auf dem Nachttisch neben dem Bett findest du ein **KNÄUL** Papier und eine **YANG-HALSKETTE**.`],
+      [viewAction, `Die Suite des ${link(mGitarrist)}en. Eine Goldene Schallplatte schmückt eine Wand, eine goldene Liebesschaukel hängt im Raum und der Betthimmel leuchtet auch golden. Einzig der Wandhohe ${link(mSpiegel)} im Raum passt nicht zum sonstigen Schick im Raum, da er einen sehr unschönen und großen Riss vorweist.`],
+      [examineAction, `Sowohl Liebesschaukel wie Bett wurden kürzlich benutzt. Immer diese notgeilen Musiker. Auf dem Nachttisch neben dem Bett findest du ein ${link(mKnaeul)} Papier und eine ${link(mYang)}.`],
     ])
   },
   {
@@ -470,14 +470,14 @@ const mysteries = [
     actions: new Map([
       [viewAction, `Ein Spiegel. Ein Riss geht quer durch. Eine analoge Uhr ist in den Spiegel eingelassen und um 02:44 stehngeblieben.`],
       [examineAction, `Der Riss im Spiegel scheint durch ein melonengroßes Objekt verursacht worden zu sein.`],
-      [powerAction, `Du stemmst dich mit aller Macht gegen den Spiegel. Der Spiegel schwingt auf und du blickst genau auf die Leiche vom DRUMMER im STUDIO.`],
+      [powerAction, `Du stemmst dich mit aller Macht gegen den Spiegel. Der Spiegel schwingt auf und du blickst genau auf die Leiche vom ${link(mDrummer)} im ${link(mStudio)}.`],
     ])
   },
   {
     thing: mKnaeul,
     actions: new Map([
       [viewAction, `Ein mit Kraft zusammengeknäultes Stück Papier.`],
-      [powerAction, `Du wendest all deine Kraft an das Papier wieder zu entknäulen. Du findest einen Teil eines **ARZTBRIEF**.`],
+      [powerAction, `Du wendest all deine Kraft an das Papier wieder zu entknäulen. Du findest einen Teil eines ${link(mArztBrief)}.`],
     ])
   },
   {
@@ -500,25 +500,27 @@ const mysteries = [
   {
     thing: mMaisonette,
     actions: new Map([
-      [viewAction, `Das Maisonette vom SÄNGER. Geschirr und Möbel sind von Diamenten geschmückt. Echte? An den Wänden gibt es ein paar Platin-Schallplatten.`],
-      [examineAction, `Es sind tatsächlich echte Diamanten. Im Schreibtisch vom SÄNGER findest du eine **ZEITUNG**, im Wandschrank ein **KASSETTENKOFFER**.`],
+      [viewAction, `Das Maisonette vom ${link(mSaenger)}. Geschirr und Möbel sind von Diamenten geschmückt. Echte? An den Wänden gibt es ein paar Platin-Schallplatten.`],
+      [examineAction, `Es sind tatsächlich echte Diamanten. Im Schreibtisch vom ${link(mSaenger)} findest du eine ${link(mZeitung)}, im Wandschrank ein ${link(mKassettenKoffer)}.`],
     ])
   },
   {
     thing: mZeitung,
     actions: new Map([
-      [viewAction, `Eine Musikerzeitung mit vielen Artikeln. Die Coverstory dreht sich um die lange Freundschaft SÄNGER und GITARRIST von Shrillride. "Wir erzählen uns alles, es gibt keine Geheimnisse". Beide freuen sich nach einer längeren Pause endlich wieder weiter touren zu können. `],
-      [examineAction, `Nichts zu untersuchen in der Zeitung.`],
+      [viewAction, `Eine Musikerzeitung mit vielen Artikeln. Die Coverstory dreht sich um Shrillride.`],
+      [examineAction, `Du liest ein bisschen über Shrillride. Die Coverstory dreht sich um die lange Freundschaft zwischen ${link(mSaenger)} und ${link(mGitarrist)}. "Wir erzählen uns alles, es gibt keine Geheimnisse". Beide freuen sich nach einer längeren Pause endlich wieder weiter touren zu können.`],
     ])
   },
   {
     thing: mKassettenKoffer,
     actions: new Map([
       [viewAction, `Ein Koffer voller Kassetten. Eine Kassette fehlt.`],
-      [examineAction, `Alle Kassetten sind vollgespielt mit dem Gesang von SÄNGER. Dir kommt kein Lied bekannt vor aber du bist auch kein Fan von Shrillride.`],
+      [examineAction, `Alle Kassetten sind vollgespielt mit dem Gesang von ${link(mSaenger)}. Dir kommt kein Lied bekannt vor aber du bist auch kein Fan von Shrillride.`],
     ])
   },
 ];
+
+
 const thingMemory = [];
 
 const title = document.querySelector("#title");
