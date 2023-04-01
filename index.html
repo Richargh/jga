@@ -641,11 +641,11 @@ function showHint(hintText){
 }
 
 function answerMystery(thing, action){
-  mysteryAnswer.innerHTML = findMysteryAnswer(thing, action);
+  mysteryAnswer.innerHTML = findMysteryAnswer(thing.trim(), action);
 }
 
 function findMysteryAnswer(thing, action){
-  const regex = new RegExp(thing.trim(), 'i');
+  const regex = new RegExp(thing, 'i');
   const mystery = mysteries.find(it => regex.test(it.thing));
   if(mystery == null)
     return "Dieses Ding existiert nicht."
