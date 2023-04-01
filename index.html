@@ -238,12 +238,12 @@ const data = [
       "Kennst du schon das Geheimnis des Spiegels?",
       "Hast du schon KRAFT auf den Spiegel angewandt? Weißt du schon wie der Spiegel den Riss bekommen hat und was es mit der Uhrzeit auf sich hat?",
       "Im Spiegel ist eine Uhr, doch welche Uhrzeit zeigt sie tatsächlich an? Welches Datum ist heute?",
-      "Die Zeitung sagt heute ist der 28.3.1982. Zeitumstellung. Die Uhrzeit im Spiegel ist also plus eine Stunde. Die Uhr ist zusammen mit Spiegel kaputtgegangen als der Drummer von der Kugel dagegengeschleudert wurde.",
+      "Die Zeitung (schau dir das Papier genau an) sagt heute ist Sonntag der 28.3.1982. Der letzte Sonntag im Monat, ergo Zeitumstellung. Die Uhrzeit im Spiegel ist also plus eine Stunde. Die Uhr ist zusammen mit Spiegel kaputtgegangen als der Drummer von der Kugel dagegengeschleudert wurde.",
       "Kennst du schon das Knäul? Hast du mal KRAFT darauf angewandt?",
       "Kennst du schon den Zusammenhang zwischen KASSETTE, KASSETTENKOFFER, ARZTBERICHT und SHRILLRIDE?",
       "Die Band Shrillride, bekannt durch ihre schrillen Schreie, kann diese derzeit nur per Playback anbieten. Der Gitarrist hat das seinem Liebhaber, dem Drummer, erzählt. Letzterer möchte gerne selber singen und hat eine der Playback-Kassetten vom Gitarristen entwendet.",
       "Vorletzter Tipp.",
-      "Der Sänger, Aushängeschild von Shrillride, ",
+      "Der Sänger, Aushängeschild von Shrillride, kann derzeit nicht singen. Er hat den Drummer umgebracht, weil dieser ihn als Sänger ersetzen kann.",
     ]
   },
   {
@@ -387,7 +387,7 @@ const mysteries = [
           thing: mGitarrist,
           actions: new Map([
             [viewAction, `Der Gitarrist der ${link(mBand)}. Spargel auf zwei Beinen.`],
-            [interviewAction, `Um 3:10 haben ${link(mDrummer)}, ${link(mSaenger)} und ich uns im ${link(mStudio)} getroffen um das Konzet zu feiern. ${link(mSaenger)} ist überraschend früh gegangen. Ich bin dann so 03:30 ins Bett gegangen. Geschlafen habe ich nicht, dafür hat ${link(mBassist)} viel zu viel geballert. Um 03:45 habe ich ${link(mDrummer)} noch in seinem ${link(mStudio)} gesehen. Danach habe ich auf den ${link(mBalkon)} eine, vielleicht zwei Kippen geraucht. Kurz darauf kam ${link(mSaenger)} zu mir und hat mitgeraucht. Als ${link(mBassist)} schrie bin ich sofort losgerannt um ihm zu helfen.`],
+            [interviewAction, `Um 3:10 haben ${link(mDrummer)}, ${link(mSaenger)} und ich uns im ${link(mStudio)} getroffen um das Konzert zu feiern. ${link(mSaenger)} ist überraschend früh gegangen. Ich bin dann so 03:30 ins Bett gegangen. Geschlafen habe ich nicht, dafür hat ${link(mBassist)} viel zu viel geballert. Um 03:45 habe ich ${link(mDrummer)} noch in seinem ${link(mStudio)} gesehen. Danach habe ich auf den ${link(mBalkon)} eine, vielleicht zwei Kippen geraucht. Kurz darauf kam ${link(mSaenger)} zu mir und hat mitgeraucht. Als ${link(mBassist)} schrie bin ich sofort losgerannt um ihm zu helfen.`],
             [examineAction, `Er hat eine leere Zigarettenschachtel bei sich. Sonst hat er nichts an außer seinem Morgenmantel. Stinkt nach allem möglichen. Auch qualm.`],
             [powerAction, `Du schubst ihn um, er gibt klein bei und steht wieder auf.`],
           ])
@@ -397,7 +397,7 @@ const mysteries = [
           thing: mSaenger,
           actions: new Map([
             [viewAction, `Der Sänger der ${link(mBand)}. Seine Wampe könnte davon profitieren mal etwas Sport zu machen. Die Krone auf seinem Kopf wirkt doch etwas dekadent.`],
-            [interviewAction, `Kurz nach 3 wollten ${link(mDrummer)} und ${link(mGitarrist)} unbedingt etwas trinken. Ich bin zwar mitgekommen, Lust hatte ich dann aber nicht und bin dann lieber mit ${link(mBassist)} mitgegangen. Gegen 03:40 habe ich seine ${link(mJsuite)} wieder verlassen. ${link(mBassist)} hat die ganze Zeit alleine geballert und der Alkohol ist nicht gut genug um die Langeweile zu überbrücken. Danach bin ich auf den Balkon zu ${link(mGitarrist)} gegangen. Als ${link(mBassist)} schrie bin ich sofort mitgekommen, um ihm zu helfen. Wir wahren etwa um 04:10 bei ihm.`],
+            [interviewAction, `Kurz nach 3 wollten ${link(mDrummer)} und ${link(mGitarrist)} unbedingt etwas trinken. Ich bin zwar mitgekommen, Lust hatte ich dann aber nicht und bin dann lieber mit ${link(mBassist)} mitgegangen. Gegen 03:40 habe ich seine ${link(mJsuite)} wieder verlassen. ${link(mBassist)} hat die ganze Zeit alleine geballert und der Alkohol ist nicht gut genug um die Langeweile zu überbrücken. Danach bin ich auf den Balkon zu ${link(mGitarrist)} gegangen. Als ${link(mBassist)} schrie bin ich sofort mitgekommen, um ihm zu helfen. Wir waren etwa um 04:10 bei ihm.`],
             [examineAction, `Stinkt wie eine Gosse auf zwei Beinen. Der Körper ist voller Schießpulver.`],
             [powerAction, `Du schubst ihn, er fällt zu Boden und schreit auf. Naja eher ein Krächzen als ein Schrei aber begeistert ist er nicht. Er steht auf, richtet seine Krone und blickt dich drohend an.`],
           ])
@@ -495,7 +495,7 @@ const mysteries = [
     thing: mKnaeul,
     actions: new Map([
       [viewAction, `Ein mit Kraft zusammengeknäultes Stück Papier.`],
-      [powerAction, `Du wendest all deine Kraft an das Papier wieder zu entknäulen. Du findest einen Teil eines ${link(mArztBrief)}.`],
+      [powerAction, `Du wendest all deine Kraft an das Papier wieder zu entknäulen. Entknäult ist das Papier ein Teil eines ${link(mArztBrief)}es.`],
     ])
   },
   {
@@ -518,7 +518,7 @@ const mysteries = [
   {
     thing: mMaisonette,
     actions: new Map([
-      [viewAction, `Das Maisonette vom ${link(mSaenger)}. Geschirr und Möbel sind von Diamenten geschmückt. Echte? An den Wänden gibt es ein paar Platin-Schallplatten.`],
+      [viewAction, `Das Maisonette vom ${link(mSaenger)}. Geschirr und Möbel sind von Diamanten geschmückt. Echte? An den Wänden gibt es ein paar Platin-Schallplatten.`],
       [examineAction, `Es sind tatsächlich echte Diamanten. Im Schreibtisch vom ${link(mSaenger)} findest du eine ${link(mZeitung)}, im Wandschrank ein ${link(mKassettenKoffer)}.`],
     ])
   },
@@ -659,7 +659,7 @@ function showHint(hintText){
 }
 
 function answerMystery(thing, action){
-  mysteryAnswer.innerHTML = findMysteryAnswer(thing.trim(), action);
+  mysteryAnswer.innerHTML = findMysteryAnswer(thing.trim().toUpperCase(), action);
 }
 
 function findMysteryAnswer(thing, action){
