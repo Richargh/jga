@@ -233,8 +233,18 @@ const data = [
   {
     id: "jf", question: "(♲ Seite 11) TÄTER MOTIV TATWAFFE ORT ZEIT?", isMystery: true,
     answerCorrect: (answer) => new RegExp('Sänger', 'i').test(answer) && new RegExp('Macht', 'i').test(answer)
-            && new RegExp('Colt', 'i').test(answer) && new RegExp('03:44', 'i').test(answer) && new RegExp('Suite', 'i').test(answer),
-    hints: []
+            && new RegExp('Colt', 'i').test(answer) && new RegExp('03:48', 'i').test(answer) && new RegExp('Suite', 'i').test(answer),
+    hints: [
+      "Kennst du schon das Geheimnis des Spiegels?",
+      "Hast du schon KRAFT auf den Spiegel angewandt? Weißt du schon wie der Spiegel den Riss bekommen hat und was es mit der Uhrzeit auf sich hat?",
+      "Im Spiegel ist eine Uhr, doch welche Uhrzeit zeigt sie tatsächlich an? Welches Datum ist heute?",
+      "Die Zeitung sagt heute ist der 28.3.1982. Zeitumstellung. Die Uhrzeit im Spiegel ist also plus eine Stunde. Die Uhr ist zusammen mit Spiegel kaputtgegangen als der Drummer von der Kugel dagegengeschleudert wurde.",
+      "Kennst du schon das Knäul? Hast du mal KRAFT darauf angewandt?",
+      "Kennst du schon den Zusammenhang zwischen KASSETTE, KASSETTENKOFFER, ARZTBERICHT und SHRILLRIDE?",
+      "Die Band Shrillride, bekannt durch ihre schrillen Schreie, kann diese derzeit nur per Playback anbieten. Der Gitarrist hat das seinem Liebhaber, dem Drummer, erzählt. Letzterer möchte gerne selber singen und hat eine der Playback-Kassetten vom Gitarristen entwendet.",
+      "Vorletzter Tipp.",
+      "Der Sänger, Aushängeschild von Shrillride, ",
+    ]
   },
   {
     id: "de", question: "(♠ Seite 12) Was ist angeordnet?",
@@ -329,7 +339,7 @@ const mysteries = [
           actions: new Map([
             [viewAction, `Ein Muskelberg dessen Muskeln auch Muskeln haben. Wirkt sehr tod.`],
             [interviewAction, `Du überlegst dein Ouija-Board zu nutzen, entscheidest dich aber dagegen. Die Leute sind noch nicht bereit dafür.`],
-            [examineAction, `Er trägt eine ${link(mYin)}. Eine ${link(mKugel)} steckt in seiner Brust. Todeszeitpunkt etwa 01:45.`],
+            [examineAction, `Er trägt eine ${link(mYin)}. Eine ${link(mKugel)} steckt in seiner Brust. Todeszeitpunkt etwa 03:45.`],
             [powerAction, `Du schiebst ihn von der Tür weg. Man kann sie wieder normal öffnen. Unter ihm liegt nix.`],
           ])
         },
@@ -353,7 +363,7 @@ const mysteries = [
           thing: mBassist,
           actions: new Map([
             [viewAction, `Lange Dreadlocks und an seiner rechten Hand fehlt ein Finger. Er wirkt etwas benebelt und abwesend.`],
-            [interviewAction, `Um ~03:00 habe ich angefangen Mohrhun zu spielen. ${link(mSaenger)} kam vielleicht 20 minuten später dazu, wollte aber nicht mitschießen. Um 03:40 ist ${link(mSaenger)} dann gegangen und 5 Minuten später habe ich einen Schuss von hinter der Mohrhuhnwand gehört. Ich bin nachsehen gegangen und habe zuerst bei ${link(mDrummer)} geklopft. Als er nicht antwortete bin ich reingegangen und habe seine Leiche gefunden und aufgeschrien.`],
+            [interviewAction, `Um 03:20 habe ich angefangen Mohrhun mit ${link(mSaenger)} zu spielen. Ich wollte ihn aufmuntern, er wollte aber nicht auf 'blöde Hühner' schießen. Um 03:40 ist ${link(mSaenger)} dann gegangen. Als mir vielleicht 15 Minuten später langweilig wurde habe ich bei ${link(mDrummer)} geklopft. Als er nicht antwortete bin ich reingegangen und habe seine Leiche gefunden und aufgeschrien. Das muss gegen 04:00 gewesen sein.`],
             [examineAction, `Seine Arme sind tätowiert mit weißen Tauben. Neben allerhand Drogen die er am und im Körper hat, ist sein ganzer Körper von oben bis unten auch voller Schießpulver. Er hat kürzlich diverse Schusswaffen abgefeurt. Eine ${link(mBeretta)} trägt er noch bei sich.`],
             [powerAction, `Du willst ihn schubsen, doch er weicht dir aus. Oder vielleicht ist er aus dem Weg getorckelt. Du bist dir nicht ganz sicher.`],
           ])
@@ -370,7 +380,7 @@ const mysteries = [
           thing: mGitarrist,
           actions: new Map([
             [viewAction, `Spargel auf zwei Beinen.`],
-            [interviewAction, `Ich war in meinem Bett. Geschlafen habe ich nicht, dafür war ${link(mBassist)} viel zu laut. Um ~03:40 habe ich auf dem ${link(mBalkon)} eine, vielleicht zwei Kippen geraucht. Kurz darauf kam ${link(mSaenger)} zu mir und hat mitgeraucht. Als ${link(mBassist)} schrie bin ich sofort losgerannt um ihm zu helfen.`],
+            [interviewAction, `Ich war in meinem Bett. Geschlafen habe ich nicht, dafür hat ${link(mBassist)} viel zu viel geballert. Um 03:45 habe ich ${link(mDrummer)} noch in seinem ${link(mStudio)} gesehen. Danach habe ich auf den ${link(mBalkon)} eine, vielleicht zwei Kippen geraucht. Kurz darauf kam ${link(mSaenger)} zu mir und hat mitgeraucht. Als ${link(mBassist)} schrie bin ich sofort losgerannt um ihm zu helfen.`],
             [examineAction, `Er hat eine leere Zigarettenschachtel bei sich. Sonst hat er nichts an außer seinem Morgenmantel. Stinkt nach allem möglichen. Auch qualm.`],
             [powerAction, `Du schubst ihn um, er gibt klein bei und steht wieder auf.`],
           ])
@@ -380,7 +390,7 @@ const mysteries = [
           thing: mSaenger,
           actions: new Map([
             [viewAction, `Seine Wampe könnte davon profitieren mal etwas Sport zu machen. Die Krone auf seinem Kopf wirkt doch etwas dekadent.`],
-            [interviewAction, `Um ~03:20 habe ich das Zimmer von ${link(mBassist)} betreten und gegen ~03:40 habe ich es wieder verlassen. ${link(mBassist)} hat die ganze Zeit geballert und der Alkohol ist nicht gut genug um die Langeweile zu überbrücken. Danach bin ich auf den Balkon zu ${link(mGitarrist)} gegangen. Als ${link(mBassist)} bin ich sofort mitgekommen, um ihm zu helfen.`],
+            [interviewAction, `Um 03:20 habe ich das Zimmer von ${link(mBassist)} betreten und gegen 03:40 habe ich es wieder verlassen. ${link(mBassist)} hat die ganze Zeit geballert und der Alkohol ist nicht gut genug um die Langeweile zu überbrücken. Danach bin ich auf den Balkon zu ${link(mGitarrist)} gegangen. Als ${link(mBassist)} schrie bin ich sofort mitgekommen, um ihm zu helfen. Wir wahren etwa um 04:10 bei ihm.`],
             [examineAction, `Stinkt wie eine Gosse auf zwei Beinen. Der Körper ist voller Schießpulver.`],
             [powerAction, `Du schubst ihn, er fällt zu Boden und schreit auf. Naja eher ein Krächzen als ein Schrei aber begeistert ist er nicht. Er steht auf, richtet seine Krone und blickt dich drohend an.`],
           ])
@@ -469,7 +479,7 @@ const mysteries = [
   {
     thing: mSpiegel,
     actions: new Map([
-      [viewAction, `Ein Spiegel. Ein Riss geht quer durch. Eine analoge Uhr ist in den Spiegel eingelassen und um 02:44 stehngeblieben.`],
+      [viewAction, `Ein Spiegel. Ein Riss geht quer durch. Eine analoge Uhr ist in den Spiegel eingelassen und um 02:48 stehngeblieben.`],
       [examineAction, `Der Riss im Spiegel scheint durch ein melonengroßes Objekt verursacht worden zu sein.`],
       [powerAction, `Du stemmst dich mit aller Macht gegen den Spiegel. Der Spiegel schwingt auf und du blickst genau auf die Leiche vom ${link(mDrummer)} im ${link(mStudio)}.`],
     ])
