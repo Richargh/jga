@@ -27,8 +27,8 @@
   <h1 id="title"></h1>
   <p id="suggestion">Es ist sinnvoll die Antworten zu notieren</p>
 
-  <img src="lock.jpeg">
-  
+  <img id="won" src="lock.jpeg">
+
   <article>
     <progress id="progress" max="100" value="70">10</progress>
     
@@ -250,7 +250,7 @@ const data = [
   },
   {
     id: "ne", question: "(♨ Seite 13) Wie glücklich bist du?",
-    answerCorrect: (answer) => answer.contains('[^_^]') || answer.contains('[^-^]'),
+    answerCorrect: (answer) => answer.includes('[^_^]') || answer.includes('[^-^]'),
     answerHint: (answer) => new RegExp('Sehr', 'i').test(answer) || new RegExp('Mega', 'i').test(answer)
             ? "Glaub ich dir aber mit Worten aber kannst du das auch mit Zeichen beschreiben?"
             : null,
@@ -522,6 +522,7 @@ const mysteries = [
 const thingMemory = [];
 
 const title = document.querySelector("#title");
+const won = document.querySelector('#won');
 const suggestion = document.querySelector("#suggestion");
 const reset = document.querySelector("#reset");
 
@@ -689,10 +690,11 @@ function selectThing(thing){
 }
 
 function showHasWon(){
-    title.innerHTML = "Gewonnen! Der Code für das Schloss ist 123.";
-    reset.style.visibility = "visible";
+    title.innerHTML = "Gewonnen! Der Code für das Schloss ist 2804.";
+    won.style.display = "block";
+    reset.style.display = "block";
 
-    submit.style.visibility = "hidden";
+    submit.style.display = "none";
     hints.style.visibility = "hidden";
 }
 
@@ -701,7 +703,7 @@ function showTitle(index){
     title.innerHTML = "Hallihallo";
   } else { 
     title.innerHTML = "Hallo Fabian";
-    suggestion.style.visibility = "visible";
+    suggestion.style.display = "block";
   }
 }
 
@@ -711,20 +713,21 @@ function showProgress(index) {
 }
 
 function showMystery(){
-  theMysteryForm.style.visibility = "visible";
+  theMysteryForm.style.display = "block";
 }
 
 function hideMystery(){
-  theMysteryForm.style.visibility = "hidden";
+  theMysteryForm.style.display = "none";
 }
 
 function resetVisibility(){
-  reset.style.visibility = "hidden";
-  suggestion.style.visibility = "hidden";
-  submit.style.visibility = "visible";
+  won.style.display = "none";
+  reset.style.display = "none";
+  suggestion.style.display = "none";
+  submit.style.display = "block";
   hints.style.visibility = "visible";
 
-  theMysteryForm.style.visibility = "hidden";
+  theMysteryForm.style.display = "none";
 }
 
 resetVisibility();
